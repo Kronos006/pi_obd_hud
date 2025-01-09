@@ -1,7 +1,7 @@
 ###################################################################################################
-## Description: 
-##
-##
+## Description: Automatically pairs and connects to the target Bluetooth device.   
+##              Monitors the connection status and retries upon disconnection.
+##              Includes a Systemd service for automatic execution at startup.
 ###################################################################################################
 ##  Version      Author           Date              Description
 ##  1.0          Rufus Brandes    09.01.2025        Initial revision
