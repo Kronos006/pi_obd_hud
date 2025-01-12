@@ -27,14 +27,19 @@ class OBDHud:
     def __init__(self, root):
         self.root = root
         self.root.title("OBD HUD")
-        self.root.geometry("400x300")
+        self.root.attributes('-fullscreen', True)
+        self.root.configure(bg="black")
 
         # Setze das Layout der GUI mit tk-Widgets
-        self.speed_label = tk.Label(self.root, text="Speed: 0 km/h", font=("Arial", 12))
-        self.speed_label.pack(pady=10)
+        frame = tk.Frame(self.root, bg="black")
+        frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
-        self.rpm_label = tk.Label(self.root, text="RPM: 0", font=("Arial", 12))
-        self.rpm_label.pack(pady=10)
+        self.rpm_label = tk.Label(frame, text="RPM: 0", font=("Arial", 56), bg="black", fg="white")
+        self.rpm_label.pack(side=tk.LEFT, padx=20, pady=20)
+
+        self.speed_label = tk.Label(frame, text="Speed: 0 km/h", font=("Arial", 56), bg="black", fg="white")
+        self.speed_label.pack(side=tk.RIGHT, padx=20, pady=20)
+
 
         # Start des OBD-Update-Timers
         self.update_values()
@@ -49,16 +54,16 @@ class OBDHud:
             # Geschwindigkeit abrufen
             speed_command = connection.query(obd.commands.SPEED)
             if speed_command and speed_command.value is not None:
-                self.speed_label.config(text=f"Speed: {speed_command.value.to('km/h')}")
+                self.speed_label.config(text=f"{speed_command.value.to('km/h')}")
             else:
-                self.speed_label.config(text="Speed: N/A")
+                self.speed_label.config(text="N/A")
 
             # RPM abrufen
             rpm_command = connection.query(obd.commands.RPM)
             if rpm_command and rpm_command.value is not None:
-                self.rpm_label.config(text=f"RPM: {rpm_command.value}")
+                self.rpm_label.config(text=f"{rpm_command.value}")
             else:
-                self.rpm_label.config(text="RPM: N/A")
+                self.rpm_label.config(text="N/A")
 
         self.root.after(1000, self.update_values)  # Timer fortsetzen
 
