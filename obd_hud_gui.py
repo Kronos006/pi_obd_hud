@@ -1,3 +1,14 @@
+###################################################################################################
+## Description:  Starts obd_hud_gui connects to OBD device via serial, fetches and displays data.
+##              
+##              
+###################################################################################################
+##  Version      Author           Date              Description
+##  1.0          Rufus Brandes    09.01.2025        Initial revision
+##
+##
+###################################################################################################
+
 import serial.tools.list_ports  # Zum Scannen der verfügbaren Ports
 import obd
 import tkinter as tk
@@ -10,7 +21,7 @@ def connect_to_obd():
     if ports:
         try:
             # Verbindung mit Port und Baudrate
-            return obd.OBD(portstr=ports[0], baudrate=38400)  # Standard-Baudrate für ELM327
+            return obd.OBD(portstr=ports[0], baudrate=38400)  
         except Exception as e:
             print(f"Fehler beim Verbinden mit dem Adapter: {e}")
             return None
