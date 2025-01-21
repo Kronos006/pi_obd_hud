@@ -63,7 +63,7 @@ class OBDHud:
             self.rpm_label.config(text="RPM: N/A")
         else:
             # Geschwindigkeit abrufen
-            speed_command = connection.query(obd.commands.SPEED)
+            speed_command = connection.query(obd.commands['SPEED'])
             if speed_command and speed_command.value is not None:
                 self.speed_label.config(text=f"{speed_command.value.to('km/h')}")
             else:
@@ -72,7 +72,7 @@ class OBDHud:
             # RPM abrufen
             rpm_command = connection.query(obd.commands.RPM)
             if rpm_command and rpm_command.value is not None:
-                self.rpm_label.config(text=f"{rpm_command.value}")
+                self.rpm_label.config(text=f"{rpm_command.value.to('rpm')}")
             else:
                 self.rpm_label.config(text="N/A")
 
